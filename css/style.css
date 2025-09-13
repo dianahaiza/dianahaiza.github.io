@@ -62,8 +62,8 @@ html{
     background: url("assets/setup-bg.jpg") no-repeat center center/cover;
     height: 700px;
     width: 100%;
-    z-index: 1;
-    opacity: .2;
+    z-index: -1;
+    opacity: .8;
 }
 
 .heading{
@@ -199,7 +199,8 @@ html{
 }
 
 footer{
-    position: fixed;
+    display: flex;
+    flex-direction: column;
     left: 0;
     bottom: 0;
     width: 100%;
