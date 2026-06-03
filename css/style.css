@@ -119,52 +119,179 @@ section{
 
 .name p{
     font-size: 1.2rem;
+    max-width: 70ch;
+}
+
+#education,
+#experience{
+    display: flex;
+    flex-direction: column;
+    padding: 88px 0;
 }
 
 #education{
-    display: flex;
-    flex-direction: column;
-    background-color: #7f5ead;
-    padding: 72px 0;
+    background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.12), transparent 35%),
+        linear-gradient(180deg, #6b46c1 0%, #4f36a6 100%);
 }
 
-#education h1{
-    margin: 0 0 32px;
+#experience{
+    background:
+        radial-gradient(circle at top right, rgba(79, 54, 166, 0.08), transparent 35%),
+        linear-gradient(180deg, #fbf9ff 0%, #ffffff 100%);
 }
 
-.columns{
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    width: min(1200px, calc(100% - 48px));
+#education h1,
+#education .section-subtitle{
+    color: rgba(255, 255, 255, 0.95);
+}
+
+#experience h1{
+    color: #4f36a6;
+}
+
+#experience .section-subtitle{
+    color: #5a556f;
+}
+
+.section-subtitle{
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 54px;
+}
+
+.timeline{
+    position: relative;
+    width: min(1080px, calc(100% - 48px));
     margin: 0 auto;
-    gap: 20px;
+    padding: 0 12px 0 28px;
 }
 
+.timeline::before{
+    content: "";
+    position: absolute;
+    left: 16px;
+    top: 10px;
+    bottom: 10px;
+    width: 2px;
+}
 
-.box{
-    background-color:#ad90d7;
-    border-radius: 20px;
-    padding: 20px;
+.timeline--education::before{
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.12));
+}
+
+.timeline--experience::before{
+    background: linear-gradient(180deg, rgba(79, 54, 166, 0.1), rgba(79, 54, 166, 0.5), rgba(79, 54, 166, 0.1));
+}
+
+.timeline-entry{
+    display: block;
+    margin-bottom: 44px;
+}
+
+.timeline-entry:last-child{
+    margin-bottom: 0;
+}
+
+.timeline-node{
+    display: none;
+}
+
+.timeline-card{
+    width: 100%;
     min-width: 0;
 }
 
-.box h2{
-    color: #6232a8;
-    font-size: 2rem;
-    margin-bottom: 40px;
-    line-height: 1.2;
-    overflow-wrap: anywhere;
-    word-break: break-word;
-    hyphens: auto;
+.timeline--education .timeline-track,
+.timeline--education .timeline-program,
+.timeline--education .timeline-notes{
+    color: rgba(255, 255, 255, 0.88);
 }
 
-.box p{
-    color: white;
-    font-size: 1.1rem;
-    line-height: 1.6;
+.timeline--education .timeline-node{
+    background: #ffffff;
+    border: 3px solid rgba(255, 255, 255, 0.92);
+    box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.12);
+}
+
+.timeline--education .timeline-card{
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 26px;
+    padding: 26px 28px 24px;
+    box-shadow: 0 18px 45px rgba(25, 10, 61, 0.12);
+    backdrop-filter: blur(4px);
+}
+
+.timeline--education .timeline-track{
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.timeline--education .timeline-card h2{
+    color: #ffffff;
+}
+
+.timeline--education .timeline-program{
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.timeline--education .timeline-notes{
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.timeline--experience .timeline-node{
+    background: #ffffff;
+    border: 3px solid #6d56c9;
+    box-shadow: 0 0 0 7px rgba(109, 86, 201, 0.12);
+}
+
+.timeline--experience .timeline-card{
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(79, 54, 166, 0.14);
+    border-radius: 26px;
+    padding: 26px 28px 24px;
+    box-shadow: 0 18px 45px rgba(38, 19, 95, 0.08);
+}
+
+.timeline--experience .timeline-track,
+.timeline--experience .timeline-program,
+.timeline--experience .timeline-notes{
+    color: #5a556f;
+}
+
+.timeline--experience .timeline-card h2{
+    color: #4f36a6;
+}
+
+.timeline-track{
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    line-height: 1.35;
+}
+
+.timeline-card h2{
+    font-size: clamp(1.7rem, 2.7vw, 2.3rem);
+    line-height: 1.15;
+    margin-bottom: 10px;
     overflow-wrap: anywhere;
-    word-break: break-word;
-    hyphens: auto;
+}
+
+.timeline-program{
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+}
+
+.timeline-notes{
+    margin: 0;
+    padding-left: 18px;
+}
+
+.timeline-notes li{
+    margin-bottom: 10px;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
 }
 
 #projects{
@@ -179,21 +306,60 @@ section{
 }
 
 .gallery {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-items: center;
+    align-items: start;
     gap: 32px;
     width: min(1200px, calc(100% - 48px));
     margin: 0 auto;
 }
 
+.gallery > img,
+.project-link{
+    max-width: 520px;
+    width: 100%;
+}
+
+.project-link,
+.project-card{
+    position: relative;
+    max-width: 520px;
+    width: 100%;
+}
+
 .gallery img{
-    width: min(100%, 520px);
+    width: 100%;
+    max-width: none;
     height: auto;
-    padding: 10px;
+    padding: 0;
     display: block;
     object-fit: contain;
+}
+
+.project-link{
+    display: block;
+    text-decoration: none;
+}
+
+.project-card{
+    display: block;
+}
+
+.project-label{
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+    z-index: 2;
+    color: #ffffff;
+    background: rgba(79, 54, 166, 0.75);
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    backdrop-filter: blur(6px);
 }
 
 .gallery img:hover{
@@ -252,35 +418,67 @@ section{
 
     .name p{
         font-size: 1rem;
+        max-width: 100%;
     }
 
-    .columns{
+    .timeline{
         width: min(100%, calc(100% - 40px));
-        gap: 16px;
     }
 
-    .box{
-        padding: 16px;
+    .timeline::before{
+        left: 16px;
     }
 
-    .box h2{
-        font-size: 1.5rem;
-        margin-bottom: 20px;
+    .timeline-entry{
+        margin-bottom: 36px;
     }
 
-    .box p{
-        font-size: 1rem;
+    .timeline-card{
+        padding: 24px;
     }
 }
 
 @media screen and (max-width: 1024px){
-    .columns{
-        grid-template-columns: 1fr;
+    #education,
+    #experience{
+        padding: 72px 0;
     }
 
-    .box{
-        width: 100%;
-        margin: 0;
+    .section-subtitle{
+        font-size: 1.25rem;
+        margin-bottom: 40px;
+    }
+
+    .timeline::before{
+        left: 16px;
+    }
+
+    .timeline-entry{
+        margin-bottom: 24px;
+    }
+
+    .timeline-card{
+        padding: 22px;
+    }
+}
+
+@media screen and (max-width: 900px){
+    .gallery{
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .gallery > img,
+    .project-link{
+        max-width: 320px;
+    }
+
+    .project-card{
+        max-width: 320px;
+    }
+
+    .gallery img{
+        max-width: 320px;
     }
 }
 
@@ -300,6 +498,7 @@ section{
 
     #about,
     #education,
+    #experience,
     #projects,
     #contact{
         padding-top: 56px;
@@ -323,34 +522,64 @@ section{
         padding: 0 15px;
     }
 
-    .columns,
-    .gallery{
+    .gallery,
+    .timeline{
         width: min(100%, calc(100% - 28px));
+    }
+
+    .section-subtitle{
+        font-size: 1.05rem;
+        margin-bottom: 30px;
+    }
+
+    .timeline-entry{
+        margin-bottom: 20px;
+    }
+
+    .timeline-node{
+        width: 12px;
+        height: 12px;
+        box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.12);
+        margin-top: 10px;
+    }
+
+    .timeline--experience .timeline-node{
+        box-shadow: 0 0 0 4px rgba(109, 86, 201, 0.12);
+    }
+
+    .timeline-card{
+        padding: 18px 16px;
+        border-radius: 20px;
+    }
+
+    .timeline-card h2{
+        font-size: 1.35rem;
+    }
+
+    .timeline-program{
+        font-size: 0.98rem;
+    }
+
+    .timeline-notes li{
+        font-size: 0.92rem;
+    }
+
+    .timeline--education .timeline-card,
+    .timeline--experience .timeline-card{
+        margin-left: 0;
     }
 
     .gallery{
         gap: 20px;
     }
 
-    .gallery img{
-        width: 100%;
-        max-width: 320px;
-        height: auto;
-    }
-
-    .box{
-        padding: 14px;
-    }
-
-    .box h2{
-        font-size: 1.2rem;
-        margin-bottom: 14px;
-    }
-
-    .box p{
+    .project-label{
+        right: 10px;
+        bottom: 10px;
         font-size: 0.85rem;
-        line-height: 1.5;
+        padding: 6px 10px;
     }
+
 }
 
 footer{
